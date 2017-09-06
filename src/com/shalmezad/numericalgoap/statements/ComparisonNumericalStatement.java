@@ -6,7 +6,7 @@ import java.util.Vector;
  * Needed for some paths
  * ie: HAS_WOOD > 3
  */
-public class ComparisonNumericalStatement extends Statement
+public class ComparisonNumericalStatement extends Statement implements IPrecondition
 {
 
     String comparator;
@@ -17,11 +17,6 @@ public class ComparisonNumericalStatement extends Statement
         this.name = name;
         this.comparator = comparator;
         this.number = number;
-    }
-
-    @Override
-    public Vector<Statement> modifyState(Vector<Statement> oldState) {
-        throw new RuntimeException("Cannot modify state with comparison statement");
     }
 
     @Override

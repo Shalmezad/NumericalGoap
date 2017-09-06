@@ -34,12 +34,6 @@ public class NumericalStatement extends Statement implements IPostCondition
     }
 
     @Override
-    public boolean conditionsMet(Vector<Statement> currentState)
-    {
-        throw new RuntimeException("Cannot check conditions met of numerical statement");
-    }
-
-    @Override
     public String toString()
     {
         return "<" + this.name + ":" + this.number + ">";

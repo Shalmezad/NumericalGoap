@@ -1,5 +1,6 @@
 package com.shalmezad.numericalgoap;
 
+import com.shalmezad.numericalgoap.statements.IPrecondition;
 import com.shalmezad.numericalgoap.statements.Statement;
 
 import java.util.Comparator;
@@ -7,12 +8,12 @@ import java.util.Optional;
 import java.util.Vector;
 
 public class Goap {
-    public static Plan planActions(Vector<Statement> currentState, Vector<Action> possibleActions, Statement goal)
+    public static Plan planActions(Vector<Statement> currentState, Vector<Action> possibleActions, IPrecondition goal)
     {
         return planActions(currentState,possibleActions,goal,20);
     }
 
-    public static Plan planActions(Vector<Statement> currentState, Vector<Action> possibleActions, Statement goal, int maxActions)
+    public static Plan planActions(Vector<Statement> currentState, Vector<Action> possibleActions, IPrecondition goal, int maxActions)
     {
         Vector<Plan> possibilities = new Vector<Plan>();
         // Add our current state onto there:

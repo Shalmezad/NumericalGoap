@@ -1,5 +1,7 @@
 package com.shalmezad.numericalgoap;
 
+import com.shalmezad.numericalgoap.statements.IPostCondition;
+import com.shalmezad.numericalgoap.statements.IPrecondition;
 import com.shalmezad.numericalgoap.statements.Statement;
 
 import java.util.Vector;
@@ -7,16 +9,16 @@ import java.util.Vector;
 public class Action
 {
     private final String name;
-    private Vector<Statement> preconditions;
-    private Vector<Statement> postconditions;
+    private Vector<IPrecondition> preconditions;
+    private Vector<IPostCondition> postconditions;
     private float cost;
 
     //region Constructors
     public Action(String name)
     {
         this.name = name;
-        preconditions = new Vector<Statement>();
-        postconditions = new Vector<Statement>();
+        preconditions = new Vector<IPrecondition>();
+        postconditions = new Vector<IPostCondition>();
         cost = 1;
     }
     //endregion
@@ -29,13 +31,13 @@ public class Action
     //endregion
 
     //region "Setters"
-    public Action addPrecondition(Statement precondition)
+    public Action addPrecondition(IPrecondition precondition)
     {
         this.preconditions.add(precondition);
         return this;
     }
 
-    public Action addPostcondition(Statement postcondition)
+    public Action addPostcondition(IPostCondition postcondition)
     {
         this.postconditions.add(postcondition);
         return this;
@@ -53,7 +55,7 @@ public class Action
         System.out.println("Applying action: " + name);
         Logger.printState(oldState);
         Vector<Statement> state = (Vector<Statement>) oldState.clone();
-        for(Statement pc : postconditions)
+        for(IPostCondition pc : postconditions)
         {
             state = pc.modifyState(state);
         }
@@ -66,7 +68,7 @@ public class Action
         System.out.println("Checking conditions: " + name);
         Logger.printState(state);
         boolean allConditionsMet = true;
-        for(Statement pc : preconditions)
+        for(IPrecondition pc : preconditions)
         {
             allConditionsMet &= pc.conditionsMet(state);
         }

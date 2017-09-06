@@ -1,5 +1,6 @@
 package com.shalmezad.numericalgoap;
 
+import com.shalmezad.numericalgoap.statements.IPrecondition;
 import com.shalmezad.numericalgoap.statements.Statement;
 
 import java.util.Vector;
@@ -17,7 +18,7 @@ public class Plan
         actions = new Vector<Action>();
     }
 
-    public boolean meetsConditions(Statement goal)
+    public boolean meetsConditions(IPrecondition goal)
     {
         return goal.conditionsMet(lastState);
     }

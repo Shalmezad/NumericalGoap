@@ -17,8 +17,8 @@ public abstract class Statement {
      */
     public String name;
 
+    /*
     public abstract Vector<Statement> modifyState(Vector<Statement> oldState);
-
     public abstract boolean conditionsMet(Vector<Statement> currentState);
 
 
@@ -27,4 +27,5 @@ public abstract class Statement {
     {
         return "<" + this.name +  ">";
     }
+    */
 }

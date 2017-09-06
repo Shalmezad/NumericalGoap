@@ -1,9 +1,6 @@
 package com.shalmezad.numericalgoap;
 
-import com.shalmezad.numericalgoap.statements.BooleanStatement;
-import com.shalmezad.numericalgoap.statements.ComparisonNumericalStatement;
-import com.shalmezad.numericalgoap.statements.NumericalStatement;
-import com.shalmezad.numericalgoap.statements.Statement;
+import com.shalmezad.numericalgoap.statements.*;
 
 import java.util.Vector;
 
@@ -17,7 +14,7 @@ public class Main {
 
         Vector<Statement> currentState = new Vector<Statement>();
         Vector<Action> possibleActions = new Vector<Action>();
-        Statement goal;
+        IPrecondition goal;
 
         // Set up our current state:
 
@@ -25,17 +22,19 @@ public class Main {
         Action actionGetTwigs = new Action("GET TWIGS");
         actionGetTwigs.addPostcondition(new NumericalStatement("HAS_WOOD", 1));
         possibleActions.add(actionGetTwigs);
-        /*
 
         Action actionGetAx = new Action("GET AX");
+        actionGetTwigs.addPrecondition(new BooleanStatement("HAS_AX", false));
         actionGetTwigs.addPostcondition(new BooleanStatement("HAS_AX", true));
         possibleActions.add(actionGetAx);
 
+        /*
         Action actionChop = new Action("CHOP");
         actionGetTwigs.addPrecondition(new BooleanStatement("HAS_AX", true));
         actionGetTwigs.addPostcondition(new NumericalStatement("HAS_WOOD", 2));
         possibleActions.add(actionChop);
         */
+
 
         // Set up our goal:
         goal = new ComparisonNumericalStatement("HAS_WOOD", ">=", 10);

@@ -2,7 +2,8 @@ package com.shalmezad.numericalgoap.statements;
 
 import java.util.Vector;
 
-public class BooleanStatement extends Statement {
+public class BooleanStatement extends Statement implements IPrecondition, IPostCondition
+{
     public boolean expectedValue;
 
     public BooleanStatement(String name, boolean expectedValue)
@@ -16,7 +17,7 @@ public class BooleanStatement extends Statement {
     {
         for(Statement statement : currentState)
         {
-            if(statement.name == this.name)
+            if(statement.name.equals(this.name))
             {
                 BooleanStatement st = (BooleanStatement)statement;
                 return st.expectedValue == this.expectedValue;
@@ -31,7 +32,7 @@ public class BooleanStatement extends Statement {
         boolean hadState = false;
         for(Statement statement : oldState)
         {
-            if(statement.name == this.name)
+            if(statement.name.equals(this.name))
             {
                 BooleanStatement st = (BooleanStatement)statement;
                 st.expectedValue = this.expectedValue;
