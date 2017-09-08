@@ -3,6 +3,7 @@ package com.shalmezad.numericalgoap;
 import com.shalmezad.numericalgoap.statements.IPrecondition;
 import com.shalmezad.numericalgoap.statements.Statement;
 
+import java.io.*;
 import java.util.Vector;
 
 public class Plan
@@ -34,5 +35,22 @@ public class Plan
         }
         returnString += "]";
         return  returnString;
+    }
+
+    public Vector<Action> deepCloneActions()
+    {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(actions);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Vector<Action>) ois.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 }

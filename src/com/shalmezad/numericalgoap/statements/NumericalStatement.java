@@ -1,8 +1,9 @@
 package com.shalmezad.numericalgoap.statements;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class NumericalStatement extends Statement implements IPostCondition
+public class NumericalStatement extends Statement implements IPostCondition, Serializable
 {
     public float number;
 
@@ -18,7 +19,7 @@ public class NumericalStatement extends Statement implements IPostCondition
         boolean hadState = false;
         for(Statement statement : oldState)
         {
-            if(statement.name == this.name)
+            if(statement.name.equals(this.name))
             {
                 NumericalStatement st = (NumericalStatement)statement;
                 st.number += this.number;

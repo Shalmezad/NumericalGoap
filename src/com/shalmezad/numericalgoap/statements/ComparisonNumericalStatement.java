@@ -1,12 +1,13 @@
 package com.shalmezad.numericalgoap.statements;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Needed for some paths
  * ie: HAS_WOOD > 3
  */
-public class ComparisonNumericalStatement extends Statement implements IPrecondition
+public class ComparisonNumericalStatement extends Statement implements IPrecondition, Serializable
 {
 
     String comparator;
@@ -24,7 +25,7 @@ public class ComparisonNumericalStatement extends Statement implements IPrecondi
         // Figure out if we have a member in the current state:
         for(Statement statement:currentState)
         {
-            if(statement.name == this.name)
+            if(statement.name.equals(this.name))
             {
                 // TODO: Remove hardcoded >=:
                 // TODO: Add type checking

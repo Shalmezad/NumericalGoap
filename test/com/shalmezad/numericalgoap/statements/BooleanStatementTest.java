@@ -68,6 +68,19 @@ public class BooleanStatementTest {
         assertFalse(falseStatement.conditionsMet(currentState));
     }
 
+    // I noticed that for this state:
+    // [<HAS_WOOD:1.0>,<HAS_AX:true>,]
+    // "Get ax" was saying conditions were met:
+    @Test
+    public void conditionsMetFalsePresentTrueMulti() throws Exception
+    {
+        BooleanStatement falseStatement = new BooleanStatement("CONDITION", false);
+        Vector<Statement> currentState = new Vector<>();
+        currentState.add(new NumericalStatement("OTHER_CONDITION", 1));
+        currentState.add(new BooleanStatement("CONDITION", true));
+        assertFalse(falseStatement.conditionsMet(currentState));
+    }
+
     //endregion
 
     // region modifyState

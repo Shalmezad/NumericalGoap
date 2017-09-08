@@ -1,8 +1,9 @@
 package com.shalmezad.numericalgoap.statements;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class BooleanStatement extends Statement implements IPrecondition, IPostCondition
+public class BooleanStatement extends Statement implements IPrecondition, IPostCondition, Serializable
 {
     public boolean expectedValue;
 
@@ -15,14 +16,17 @@ public class BooleanStatement extends Statement implements IPrecondition, IPostC
     @Override
     public boolean conditionsMet(Vector<Statement> currentState)
     {
+        //System.out.println("Checking conditions met: " + this);
         for(Statement statement : currentState)
         {
             if(statement.name.equals(this.name))
             {
+                //System.out.println("Found matching statement: " + statement);
                 BooleanStatement st = (BooleanStatement)statement;
                 return st.expectedValue == this.expectedValue;
             }
         }
+        //System.out.println("No matching statement found");
         return !expectedValue;
     }
 

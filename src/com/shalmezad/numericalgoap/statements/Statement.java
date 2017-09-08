@@ -1,5 +1,6 @@
 package com.shalmezad.numericalgoap.statements;
 
+import java.io.*;
 import java.util.Vector;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Vector;
  * or "!AT GOAL"
  * or "HAS_WOOD(3)"
  */
-public abstract class Statement {
+public abstract class Statement implements Serializable {
 
     /**
      * Name of the component
@@ -28,4 +29,21 @@ public abstract class Statement {
         return "<" + this.name +  ">";
     }
     */
+
+    public static Vector<Statement> deepCloneState(Vector<Statement> state)
+    {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(state);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Vector<Statement>) ois.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
 }
